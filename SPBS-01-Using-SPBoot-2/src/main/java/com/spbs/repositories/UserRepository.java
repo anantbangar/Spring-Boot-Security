@@ -6,5 +6,5 @@ import com.spbs.entities.User;
 
 public interface UserRepository extends JpaRepository<User, String> 
 {
-	public User findByUserName(String UserName);
+	public User findByUserName(String userName);
 }
