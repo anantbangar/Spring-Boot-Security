@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.spbs.services.CustomUserDetailService;
 
@@ -27,9 +28,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter
 	{
 		http
 			.csrf().disable() //csrf-Cross Site Request Forgery-which secure POST/PUT methods for non browser applications
-			.authorizeRequests()
-			//permiting to all role can access this url
-			//.antMatchers("/public/**").permitAll()
+			//.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			//.and()
+			.authorizeRequests()			
+			//.antMatchers("/public/**").permitAll() //permiting to all role can access this url
 			.antMatchers("/public/**").hasRole("NORMAL")
 			.antMatchers("/users/**").hasRole("ADMIN")
 			.anyRequest()
@@ -42,7 +44,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception 
 	{
-		/*
+		
 		//creating user using inMemoryAuthentication
 		auth
 			.inMemoryAuthentication()
@@ -56,12 +58,14 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter
 			.withUser("shailoo")
 			.password(this.passwordEncoder().encode("shailoo"))
 			.roles("NORMAL");
-		*/
 		
+		
+		/*
 		//Authentication using Database
 		auth
 			.userDetailsService(customUserDetailService)
 			.passwordEncoder(passwordEncoder());
+		*/
 	}
 	
 	@Bean

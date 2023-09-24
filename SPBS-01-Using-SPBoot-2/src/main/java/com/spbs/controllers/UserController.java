@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spbs.entities.User;
@@ -44,6 +45,12 @@ public class UserController
 	public ResponseEntity<User> getUser(@PathVariable("userName") String userName)
 	{
 		User user = userServiceImpl.getUser(userName);
+		return ResponseEntity.ok(user);
+	}
+	
+	@PostMapping("/getResponse")
+	public ResponseEntity<User> getResponse(@RequestBody User user)
+	{		
 		return ResponseEntity.ok(user);
 	}
 
