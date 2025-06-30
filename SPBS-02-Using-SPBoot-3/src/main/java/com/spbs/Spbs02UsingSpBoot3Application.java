@@ -49,6 +49,12 @@ public class Spbs02UsingSpBoot3Application implements CommandLineRunner
 		user4.setPassword(this.passwordEncoder.encode("sham"));
 		this.userRepository.save(user4);
 		
+		User1 user5= new User1();
+		user5.setUserName("pawan");
+		user5.setRole("ROLE_ADMIN");
+		user5.setPassword(this.passwordEncoder.encode("pawan"));
+		this.userRepository.save(user5);
+		
 	}
 
 }
